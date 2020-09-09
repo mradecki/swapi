@@ -1,5 +1,7 @@
 import os
+
 import dj_database_url
+from memcacheify import memcacheify
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -159,9 +161,24 @@ CORS_ALLOW_METHODS = (
 
 # Memcache
 
-from memcacheify import memcacheify
 
 CACHES = memcacheify()
 
 
 APPEND_SLASH = True
+
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'WARNING',
+    },
+}
